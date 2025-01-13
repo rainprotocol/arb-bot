@@ -12,7 +12,7 @@ describe("Test gas", async function () {
         // mock L1 signer for L2 client
         const l1Signer = {
             getL1BaseFee: async () => 20n,
-            estimateL1Gas: async () => 5n,
+            estimateL1Fee: async () => 5n,
         };
         // mock normal L1 signer
         const signer = {
@@ -30,10 +30,9 @@ describe("Test gas", async function () {
         const expected1 = {
             gas: 55n,
             gasPrice: 2n,
-            l1Gas: 5n,
             l1GasPrice: 20n,
-            l1Cost: 20n * 5n,
-            totalGasCost: 2n * 55n + 20n * 5n,
+            l1Cost: 5n,
+            totalGasCost: 2n * 55n + 5n,
         };
         assert.deepEqual(result1, expected1);
 
@@ -43,7 +42,6 @@ describe("Test gas", async function () {
         const expected2 = {
             gas: 55n,
             gasPrice: 2n,
-            l1Gas: 0n,
             l1GasPrice: 0n,
             l1Cost: 0n,
             totalGasCost: 2n * 55n,

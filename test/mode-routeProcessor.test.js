@@ -130,6 +130,18 @@ describe("Test route processor dryrun", async function () {
                 amountOut: formatUnits(getAmountOut(vaultBalance), 6),
                 marketPrice: formatUnits(getCurrentPrice(vaultBalance)),
                 route: expectedRouteVisual,
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -338,6 +350,18 @@ describe("Test route processor find opp", async function () {
                 amountOut: formatUnits(getAmountOut(vaultBalance), 6),
                 marketPrice: formatUnits(getCurrentPrice(vaultBalance)),
                 route: expectedRouteVisual,
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -427,6 +451,18 @@ describe("Test route processor find opp", async function () {
                     getCurrentPrice(ethers.utils.parseUnits("9999999.701976776123046875")),
                 ),
                 route: expectedRouteVisual,
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -640,6 +676,18 @@ describe("Test find opp with retries", async function () {
                 amountOut: formatUnits(getAmountOut(vaultBalance), 6),
                 marketPrice: formatUnits(getCurrentPrice(vaultBalance)),
                 route: expectedRouteVisual,
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);

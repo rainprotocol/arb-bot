@@ -173,6 +173,14 @@ describe("Test process pair", async function () {
                         vaultBalance,
                     ),
                 ),
+                "details.gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "details.gasEst.headroom.gasPrice": gasPrice
+                    .mul(config.gasPriceMultiplier)
+                    .div(100)
+                    .toString(),
+                "details.gasEst.headroom.totalCost": gasLimitEstimation
+                    .mul(gasPrice.mul(config.gasPriceMultiplier).div(100))
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -254,6 +262,14 @@ describe("Test process pair", async function () {
                         vaultBalance,
                     ),
                 ),
+                "details.gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "details.gasEst.headroom.gasPrice": gasPrice
+                    .mul(config.gasPriceMultiplier)
+                    .div(100)
+                    .toString(),
+                "details.gasEst.headroom.totalCost": gasLimitEstimation
+                    .mul(gasPrice.mul(config.gasPriceMultiplier).div(100))
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -541,6 +557,14 @@ describe("Test process pair", async function () {
                             vaultBalance,
                         ),
                     ),
+                    "details.gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                    "details.gasEst.headroom.gasPrice": gasPrice
+                        .mul(config.gasPriceMultiplier)
+                        .div(100)
+                        .toString(),
+                    "details.gasEst.headroom.totalCost": gasLimitEstimation
+                        .mul(gasPrice.mul(config.gasPriceMultiplier).div(100))
+                        .toString(),
                 },
             };
             assert.deepEqual(error, expected);
@@ -632,6 +656,14 @@ describe("Test process pair", async function () {
                             vaultBalance,
                         ),
                     ),
+                    "details.gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                    "details.gasEst.headroom.gasPrice": gasPrice
+                        .mul(config.gasPriceMultiplier)
+                        .div(100)
+                        .toString(),
+                    "details.gasEst.headroom.totalCost": gasLimitEstimation
+                        .mul(gasPrice.mul(config.gasPriceMultiplier).div(100))
+                        .toString(),
                 },
             };
             assert.deepEqual(error, expected);
@@ -738,6 +770,14 @@ describe("Test process pair", async function () {
                             vaultBalance,
                         ),
                     ),
+                    "details.gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                    "details.gasEst.headroom.gasPrice": gasPrice
+                        .mul(config.gasPriceMultiplier)
+                        .div(100)
+                        .toString(),
+                    "details.gasEst.headroom.totalCost": gasLimitEstimation
+                        .mul(gasPrice.mul(config.gasPriceMultiplier).div(100))
+                        .toString(),
                 },
             };
             assert.deepEqual(error, expected);

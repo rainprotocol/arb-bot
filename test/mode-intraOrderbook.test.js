@@ -127,6 +127,18 @@ describe("Test intra-orderbook dryrun", async function () {
             spanAttributes: {
                 oppBlockNumber,
                 foundOpp: true,
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -263,6 +275,18 @@ describe("Test intra-orderbook find opp", async function () {
             spanAttributes: {
                 oppBlockNumber,
                 foundOpp: true,
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);

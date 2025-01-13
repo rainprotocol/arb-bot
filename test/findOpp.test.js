@@ -141,6 +141,18 @@ describe("Test find opp", async function () {
                 marketPrice: formatUnits(getCurrentPrice(vaultBalance)),
                 route: expectedRouteVisual,
                 clearModePick: "rp4",
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -237,6 +249,18 @@ describe("Test find opp", async function () {
                 foundOpp: true,
                 maxInput: vaultBalance.toString(),
                 clearModePick: "inter",
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);
@@ -338,6 +362,18 @@ describe("Test find opp", async function () {
                 oppBlockNumber,
                 foundOpp: true,
                 clearModePick: "intra",
+                "gasEst.final.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.final.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.final.gasPrice": gasPrice.toString(),
+                "gasEst.final.minBountyExpected": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasLimit": gasLimitEstimation.toString(),
+                "gasEst.headroom.totalCost": gasLimitEstimation.mul(gasPrice).toString(),
+                "gasEst.headroom.gasPrice": gasPrice.toString(),
+                "gasEst.headroom.minBountyExpected": gasLimitEstimation
+                    .mul(gasPrice)
+                    .mul(103)
+                    .div(100)
+                    .toString(),
             },
         };
         assert.deepEqual(result, expected);

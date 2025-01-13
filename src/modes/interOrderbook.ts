@@ -125,6 +125,23 @@ export async function dryrun({
         const estimation = await estimateGasCost(rawtx, signer, config, l1GasPrice);
         l1Cost = estimation.l1Cost;
         gasLimit = ethers.BigNumber.from(estimation.gas).mul(config.gasLimitMultiplier).div(100);
+
+        // include dryrun headroom gas estimation in otel logs
+        extendSpanAttributes(
+            spanAttributes,
+            {
+                gasLimit: estimation.gas.toString(),
+                totalCost: estimation.totalGasCost.toString(),
+                gasPrice: estimation.gasPrice.toString(),
+                ...(config.isSpecialL2
+                    ? {
+                          l1Cost: estimation.l1Cost.toString(),
+                          l1GasPrice: estimation.l1GasPrice.toString(),
+                      }
+                    : {}),
+            },
+            "gasEst.headroom",
+        );
     } catch (e) {
         const isNodeError = containsNodeError(e as BaseError);
         const errMsg = errorSnapshot("", e);
@@ -153,6 +170,10 @@ export async function dryrun({
     // sender output which is already called above
     if (config.gasCoveragePercentage !== "0") {
         const headroom = (Number(config.gasCoveragePercentage) * 1.03).toFixed();
+        spanAttributes["gasEst.headroom.minBountyExpected"] = gasCost
+            .mul(headroom)
+            .div("100")
+            .toString();
         task.evaluable.bytecode = await parseRainlang(
             await getBountyEnsureRainlang(
                 ethers.utils.parseUnits(inputToEthPrice),
@@ -177,6 +198,23 @@ export async function dryrun({
                 .div(100);
             rawtx.gas = gasLimit.toBigInt();
             gasCost = gasLimit.mul(gasPrice).add(estimation.l1Cost);
+
+            // include dryrun final gas estimation in otel logs
+            extendSpanAttributes(
+                spanAttributes,
+                {
+                    gasLimit: estimation.gas.toString(),
+                    totalCost: estimation.totalGasCost.toString(),
+                    gasPrice: estimation.gasPrice.toString(),
+                    ...(config.isSpecialL2
+                        ? {
+                              l1Cost: estimation.l1Cost.toString(),
+                              l1GasPrice: estimation.l1GasPrice.toString(),
+                          }
+                        : {}),
+                },
+                "gasEst.final",
+            );
             task.evaluable.bytecode = await parseRainlang(
                 await getBountyEnsureRainlang(
                     ethers.utils.parseUnits(inputToEthPrice),
@@ -192,6 +230,10 @@ export async function dryrun({
                 takeOrdersConfigStruct,
                 task,
             ]);
+            spanAttributes["gasEst.final.minBountyExpected"] = gasCost
+                .mul(config.gasCoveragePercentage)
+                .div("100")
+                .toString();
         } catch (e) {
             const isNodeError = containsNodeError(e as BaseError);
             const errMsg = errorSnapshot("", e);

@@ -18,7 +18,6 @@ export async function estimateGasCost(
     const result = {
         gas,
         gasPrice,
-        l1Gas: 0n,
         l1GasPrice: 0n,
         l1Cost: 0n,
         totalGasCost: gasPrice * gas,
@@ -31,14 +30,13 @@ export async function estimateGasCost(
             if (typeof l1GasPrice !== "bigint") {
                 l1GasPrice = (await l1Signer_.getL1BaseFee()) as bigint;
             }
-            const l1Gas = await l1Signer_.estimateL1Gas({
+            const l1Cost = await l1Signer_.estimateL1Fee({
                 to: tx.to,
                 data: tx.data,
             });
-            result.l1Gas = l1Gas;
             result.l1GasPrice = l1GasPrice;
-            result.l1Cost = l1Gas * l1GasPrice;
-            result.totalGasCost += result.l1Cost;
+            result.l1Cost = l1Cost;
+            result.totalGasCost += l1Cost;
         } catch {}
     }
     return result;
